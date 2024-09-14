@@ -1,6 +1,6 @@
 # .github/workflows/deploy.yml
 
-name: Build and Deploy Web
+name: enviar artefato
 
 on:
   # Pode ser ativado por push ou manualmente
