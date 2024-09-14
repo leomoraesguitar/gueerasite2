@@ -3,10 +3,10 @@
 name: Deploy to Github
 
 on:
-  push:
-    branches:
-      - master
-      - main
+  # push:
+  #   branches:
+  #     - master
+  #     - main
   workflow_dispatch:  # Permite execução manual
 
 jobs:
