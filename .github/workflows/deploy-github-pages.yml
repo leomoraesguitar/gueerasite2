@@ -32,27 +32,36 @@ jobs:
   build:
     runs-on: windows-latest # ubuntu-latest
 
-    steps:
+
+# baixa o código-fonte do repositório no ambiente de execução.
+    steps: 
     - name: Checkout code
       uses: actions/checkout@v4
-
+      
+#instalação do python na versão desejada
     - name: Setup Python ${{ env.PYTHON_VERSION }}
       uses: actions/setup-python@v2
       with:
         python-version: ${{ env.PYTHON_VERSION }}
-
+        
+#Instalação das dependências
     - name: Install Python Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
-  
+        pip install -U -r requirements.txt
+
+  # Instalação do Fluter na versão desejada
     - name: Setup Flutter ${{ env.FLUTTER_VERSION }}
       uses: subosito/flutter-action@v2
       with:
         flutter-version: ${{ env.FLUTTER_VERSION }}
 
+#esta etapa executará a construção (build) do projeto web usando o Flet.
+#GITHUB_REPOSITORY: usuario/meu-projeto, USER: usuario, PROJECT_BASE_URL: meu-projeto
+#flutter config --no-analytics: Desativa o envio de dados analíticos para o Flutter
+#flet build web --base-url ${GITHUB_REPOSITORY#*/} --route-url-strategy hash: Comando para construir o projeto web usando o Flet.
     - name: Flet Build Web
-      run: |
+      run: | #significa que várias linhas de comandos serão executadas como parte do mesmo bloco.
             echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}, USER: ${GITHUB_REPOSITORY%/*}, PROJECT_BASE_URL: ${GITHUB_REPOSITORY#*/}"
             flutter config --no-analytics
             flet build web --base-url ${GITHUB_REPOSITORY#*/} --route-url-strategy hash
