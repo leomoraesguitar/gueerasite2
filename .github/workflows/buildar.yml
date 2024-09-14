@@ -30,6 +30,8 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+
+#Este ajuste permite que o deploy ocorra tanto em um evento de push quanto quando o fluxo de trabalho é disparado manualmente ( workflow_dispatch).
       - name: Deploy to GitHub Pages 🚀
         if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}  # Deploy em push ou execução manual
         id: deployment
